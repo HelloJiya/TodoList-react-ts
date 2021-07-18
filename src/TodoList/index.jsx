@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import './index.scss'
 
+import TodoListItem from './components/TodoListItem.jsx'
+
 export default class TodoList extends Component {
 
   state = {
@@ -36,13 +38,14 @@ export default class TodoList extends Component {
         <ul className='todo-list-box'>
           {
             todoList.map((item, index) => {
-              return (
+              {/* return (
                 <li key={ index } className='todo-list-item'>
                   <span>{ index + 1 }</span>  
                   <span className='todo-list-item--content'>{ item }</span> 
                   <button onClick={ e => this.delItem(e, index) } className='button todo-list--button'>删除</button>
-                </li>
-              )
+                </li>        
+              ) */}
+              return <TodoListItem key={ index }  index={ index } delItem={ this.delItem } item={ item }/>
             })
           }
         </ul>
