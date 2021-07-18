@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './index.scss'
 
 export default class TodoList extends Component {
 
@@ -13,6 +14,7 @@ export default class TodoList extends Component {
   }
   addItem = () =>{
     const { todoList, curVal } = this.state
+    if(!curVal) return
     this.setState({ todoList: [curVal, ...todoList], curVal: ''})
   }
 
@@ -25,19 +27,20 @@ export default class TodoList extends Component {
   render() {
     const { todoList, curVal } = this.state
     return (
-      <div>
-        <div>
-          <input value={ curVal } onChange={ this.changeInputVal } />
-          <button onClick={ this.addItem }>添加</button>
+      <div className='todo-list'>
+        <div className='todo-input-box'>
+          <input value={ curVal } onChange={ this.changeInputVal } className='todo-input' />
+          <button onClick={ this.addItem } className='button todo-input--button'>添加</button>
         </div>
 
-        <ul>
+        <ul className='todo-list-box'>
           {
             todoList.map((item, index) => {
               return (
-                <li key={ index }>
-                  { item }
-                  <button onClick={ e => this.delItem(e, index) }>删除</button>
+                <li key={ index } className='todo-list-item'>
+                  <span>{ index + 1 }</span>  
+                  <span className='todo-list-item--content'>{ item }</span> 
+                  <button onClick={ e => this.delItem(e, index) } className='button todo-list--button'>删除</button>
                 </li>
               )
             })
